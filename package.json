@@ -1,0 +1,29 @@
+{
+  "name": "erc20seller",
+  "version": "1.0.0",
+  "description": "Simple contract to sell ERC20 tokens",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kleros/ERC20Seller.git"
+  },
+  "keywords": [
+    "ERC20",
+    "sell"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kleros/ERC20Seller/issues"
+  },
+  "homepage": "https://github.com/kleros/ERC20Seller#readme",
+  "dependencies": {
+    "openzeppelin-solidity": "^2.3.0"
+  }
+}
