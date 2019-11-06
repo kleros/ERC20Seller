@@ -451,7 +451,7 @@ contract('ERC20Seller', function(accounts) {
 
   it('Check that buying the max number of orders does not exceed the gas limit', async () => {
     for (let i = 0; i < MAX_ORDERS; i++)
-      // Make all the prices differ thought it's not crucal for the test.
+      // Make all the prices differ though it's not crucal for the test.
       await erc20Seller.addOrder(1000 + i, 1, { from: seller })
 
     await expectRevert(
