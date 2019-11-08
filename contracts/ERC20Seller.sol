@@ -31,9 +31,9 @@ contract ERC20Seller {
     
     /* Storage */
     
-    address payable seller;        // The party selling the tokens.
-    IERC20 public token;           // The token to be sold.
-    uint public divisor;           // The divisor of the token price. It is used to allow prices lower than 1 wei / basic_unit.
+    address payable seller; // The party selling the tokens.
+    IERC20 public token;    // The token to be sold.
+    uint public divisor;    // The divisor of the token price. It is used to allow prices lower than 1 wei / basic_unit.
     
     // A sell order.
     struct Order {
@@ -101,7 +101,7 @@ contract ERC20Seller {
     function removeOrder(uint _orderID) external {
         require(msg.sender == seller, "Only the seller can perform this action.");
         require(token.transfer(seller, orders[_orderID].amount));
-        orders[_orderID] = orders[orders.length-1];
+        orders[_orderID] = orders[orders.length - 1];
         --orders.length;
     }
     
