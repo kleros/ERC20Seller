@@ -32,8 +32,8 @@ contract ERC20Seller {
     /* Storage */
     
     address payable seller;        // The party selling the tokens.
-    IERC20 public token;   // The token to be sold.
-    uint public divisor;   // The divisor of the token price.
+    IERC20 public token;           // The token to be sold.
+    uint public divisor;           // The divisor of the token price. It is used to allow prices lower than 1 wei / basic_unit.
     
     // A sell order.
     struct Order {
@@ -45,7 +45,7 @@ contract ERC20Seller {
     
     /* Constant */
     
-    uint public MAX_ORDERS = 100;  // The maximum amount of simultaneous orders. It is used to avoid having so much orders that the call would run out of gas.
+    uint public MAX_ORDERS = 100;   // The maximum amount of simultaneous orders. It is used to avoid having so much orders that the call would run out of gas.
     uint NO_ORDER_FOUND = uint(-1); // Value when no orders are found.
     uint MAX_VALUE = uint(-1);      // Maximum value, such that it is never exceeded.
     
@@ -101,7 +101,7 @@ contract ERC20Seller {
     function removeOrder(uint _orderID) external {
         require(msg.sender == seller, "Only the seller can perform this action.");
         require(token.transfer(seller, orders[_orderID].amount));
-        orders[_orderID]=orders[orders.length-1];
+        orders[_orderID] = orders[orders.length-1];
         --orders.length;
     }
     
@@ -128,6 +128,7 @@ contract ERC20Seller {
                 tokensBought = tokensBought.add(orders[cheapestOrder].amount);
                 remainingETH = remainingETH.sub(fullOrderValue);
                 orders[cheapestOrder].amount = 0;
+                cheapestOrder = findCheapestOrder();
             } else { // Take the whole buy.
                 uint amountBought = remainingETH.mul(divisor).div(orders[cheapestOrder].price);
                 tokensBought = tokensBought.add(amountBought);
@@ -135,7 +136,6 @@ contract ERC20Seller {
                 remainingETH = 0;
             }
             
-            cheapestOrder = findCheapestOrder();
         }
         
         require(token.transfer(msg.sender, tokensBought));
@@ -154,7 +154,7 @@ contract ERC20Seller {
         uint bestPrice = MAX_VALUE;
         _orderID = NO_ORDER_FOUND;
         
-        for (uint i=0; i<orders.length; ++i) {
+        for (uint i = 0; i < orders.length; ++i) {
             if (orders[i].price<bestPrice && orders[i].amount!=0) {
                 bestPrice = orders[i].price;
                 _orderID = i;
