@@ -45,8 +45,8 @@ contract ERC20Seller {
     
     /* Constant */
     
-    uint public MAX_ORDERS = 100;   // The maximum amount of simultaneous orders. It is used to avoid having so much orders that the call would run out of gas.
-    uint NO_ORDER_FOUND = uint(-1); // Value when no orders are found.
+    uint public MAX_ORDERS = 100;   // The maximum amount of simultaneous orders. It is used to avoid having so much orders that the calls would run out of gas.
+    uint NO_ORDER_FOUND = uint(-1); // Value returned by findCheapestOrder when no orders are found.
     uint MAX_VALUE = uint(-1);      // Maximum value, such that it is never exceeded.
     
     /* Constructor */
@@ -86,7 +86,7 @@ contract ERC20Seller {
     
     /** @dev Decrease the amount of an order.
      *  @param _orderID The ID of the order to decrease the amount.
-     *  @param _amount The amount of tokens to remove from the total amount in base units. If it is higher than the amount, all the amount will be removed.
+     *  @param _amount The amount of tokens to remove from the total amount in base units. If it is higher than the amount, all the tokens will be removed.
      */
     function decreaseAmount(uint _orderID, uint _amount) external {
         require(msg.sender == seller, "Only the seller can perform this action.");
