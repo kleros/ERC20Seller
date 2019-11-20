@@ -49,6 +49,15 @@ contract ERC20Seller {
     uint NO_ORDER_FOUND = uint(-1); // Value returned by findCheapestOrder when no orders are found.
     uint MAX_VALUE = uint(-1);      // Maximum value, such that it is never exceeded.
 
+    /* Events */
+
+    /**
+     *  @dev Emitted when a contributor makes a purchase.
+     *  @param _contributor The account that made the purchase.
+     *  @param _amount The amount of tokens in basic units.
+     */
+    event TokenPurchase(address _contributor, uint _amount);
+
     /* Constructor */
 
     /** @dev Constructs the seller contract.
@@ -139,6 +148,7 @@ contract ERC20Seller {
         }
 
         require(token.transfer(msg.sender, tokensBought));
+        emit TokenPurchase(msg.sender, tokensBought);
         if (remainingETH != 0)
             msg.sender.transfer(remainingETH); // Send back the ETH not used.
         seller.transfer(address(this).balance); // Send the ETH to the seller.
