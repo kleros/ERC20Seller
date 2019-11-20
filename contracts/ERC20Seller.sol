@@ -185,9 +185,10 @@ contract ERC20Seller {
       orderIDs = new uint[](orderCount);
       uint counter = 0;
       for (uint j = 0; j < orders.length; j++) {
-        if (orders[j].amount > 0)
+        if (orders[j].amount > 0) {
           orderIDs[counter] = j;
           counter++;
+        }
       }
     }
 }
