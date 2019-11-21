@@ -20,7 +20,7 @@ import { IERC20 } from "openzeppelin-solidity/contracts/token/ERC20/IERC20.sol";
  *  It is not optimized for handling a high amount of orders by the seller but to support 1-10 orders on average.
  *  If you intend to use a lot more simultaneous orders, we would suggest developing a heap-based version of this contract.
  *  Note that:
- *      - Orders are not automatically removed when they are completely fullfilled in order to avoid changing the orderID without intervention of the seller.
+ *      - Orders are not automatically removed when they are completely fulfilled in order to avoid changing the orderID without intervention of the seller.
  *      - Tokens amounts and prices are supposed to be reasonable such that multiplying them does not overflow.
  *      - A few wei or basic token units may be lost in the process. Only use this contract to sell a token whose basic unit price is insignificant.
  *      - The token contract is trusted not to reenter during a call to this contract.
