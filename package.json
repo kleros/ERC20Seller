@@ -7,7 +7,12 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettify": "kathari prettify",
+    "lint:sol": "kathari lint:sol",
+    "lint:js": "kathari lint:js",
+    "lint": "yarn run lint:sol",
+    "build": "truffle compile"
   },
   "repository": {
     "type": "git",
@@ -24,6 +29,10 @@
   },
   "homepage": "https://github.com/kleros/ERC20Seller#readme",
   "dependencies": {
-    "openzeppelin-solidity": "^2.3.0"
+    "@kleros/kathari": "^0.25.0",
+    "bn.js": "^5.0.0",
+    "chai": "^4.2.0",
+    "openzeppelin-solidity": "^2.3.0",
+    "openzeppelin-test-helpers": "^0.5.1"
   }
 }
